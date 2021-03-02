@@ -61,7 +61,7 @@ Write your code in `src/carbon-dating.js`.
 
 ### **Dream team**
 
-Imagine you and your friends decide to create a **dream team**. This team should have a cool secret name that contains encrypted information about it. For example, these may be the **first letters** of the names of its members in **upper case** **sorted alphabetically**.
+Imagine you and your friends decide to create a **dream team**. This team should have a cool secret name that contains encrypted information about it. For example, these may be the **first letters** of the names of its members in **upper case** **sorted abcically**.
 Your task is to implement the `createDreamTeam(members)` function that returns name of a newly made team (`string`) based on the names of its members (`Array`). Good luck!
 
 Names of the members should be `strings`. Values with other **type** should be **ignored**. In case of wrong `members` **type** function must return `false`.
@@ -247,7 +247,7 @@ Each instance of `VigenereCipheringMachine` must have 2 methods: `encrypt` and `
 
 `decrypt` method accepts 2 parameters: `encryptedMessage` (`string` to decode) and `key` (`string`-keyword).
 
-These parameters for both methods are **mandatory**. If at least one of them has not been given, an `Error` must be thrown. The text returned by these methods must be **uppercase**. Machines encrypt and decrypt **only latin alphabet** (all other symbols remain unchanged).
+These parameters for both methods are **mandatory**. If at least one of them has not been given, an `Error` must be thrown. The text returned by these methods must be **uppercase**. Machines encrypt and decrypt **only latin abc** (all other symbols remain unchanged).
 
 You don't need to validate value sent to `constructor` and to `encrypt` and `decrypt` methods (except throwing an `Error` on absence of argument for these methods).
 

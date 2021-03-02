@@ -1,24 +1,14 @@
 class VigenereCipheringMachine {
   constructor(isDirectMachine) {
     this.isDirectMachine = isDirectMachine
-    this.alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-    this.square = []
+    this.abc = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    this.arr = []
   }
 
-  generateSquare() {
-    for (let i = 0; i < this.alphabet.length; i++) {
-      let row = this.alphabet.slice(i)
-      row += this.alphabet.slice(0, i)
-      this.square.push(row)
-    }
-  }
 
-  getSquare() {
-    return this.square
-  }
 
   repeatString(key, message) {
-    let resultString = "";
+    let resultStr = "";
     let keyLength = key.length;
     let it = 0;
 
@@ -26,14 +16,25 @@ class VigenereCipheringMachine {
       if (it % keyLength === 0) {
         it = 0;
       }
-      if (this.alphabet.indexOf(message[i]) >= 0) {
-        resultString += key[it];
+      if (this.abc.indexOf(message[i]) >= 0) {
+        resultStr += key[it];
         it++;
       } else {
-        resultString += message[i];
+        resultStr += message[i];
       }
     }
-    return resultString;
+    return resultStr;
+  }
+  genArr() {
+    for (let i = 0; i < this.abc.length; i++) {
+      let row = this.abc.slice(i)
+      row += this.abc.slice(0, i)
+      this.arr.push(row)
+    }
+  }
+
+  getArr() {
+    return this.arr
   }
 
   encrypt(message, key) {
@@ -45,20 +46,20 @@ class VigenereCipheringMachine {
         return result
 
       } else {
-        let upperMessage = message.toUpperCase()
-        let upperKey = key.toUpperCase()
+        let upSend = message.toUpperCase()
+        let newKeys = key.toUpperCase()
         let encryptMessage = "";
-        let upperNewKey = this.repeatString(upperKey, upperMessage);
-        this.generateSquare();
+        let upperNewKey = this.repeatString(newKeys, upSend);
+        this.genArr();
 
-        for (let it = 0; it < upperMessage.length;) {
-          if (this.alphabet.indexOf(upperMessage[it]) >= 0) {
-            let i = this.alphabet.indexOf(upperMessage[it]);
-            let j = this.alphabet.indexOf(upperNewKey[it]);
-            encryptMessage += this.square[i][j];
+        for (let it = 0; it < upSend.length;) {
+          if (this.abc.indexOf(upSend[it]) >= 0) {
+            let i = this.abc.indexOf(upSend[it]);
+            let j = this.abc.indexOf(upperNewKey[it]);
+            encryptMessage += this.arr[i][j];
             it++
           } else {
-            encryptMessage += upperMessage[it]
+            encryptMessage += upSend[it]
             it++
           }
         }
@@ -75,19 +76,19 @@ class VigenereCipheringMachine {
         return result
 
       } else {
-        let upperMessage = encryptedMess.toUpperCase()
-        let upperKey = key.toUpperCase()
+        let upSend = encryptedMess.toUpperCase()
+        let newKeys = key.toUpperCase()
         let decryptMessage = "";
-        let upperNewKey = this.repeatString(upperKey, upperMessage);
-        this.generateSquare();
+        let upperNewKey = this.repeatString(newKeys, upSend);
+        this.genArr();
 
-        for (let it = 0; it < upperMessage.length; it++) {
-          if (this.alphabet.indexOf(upperMessage[it]) >= 0) {
-            let i = this.alphabet.indexOf(upperNewKey[it]);
-            let j = this.square[i].indexOf(upperMessage[it]);
-            decryptMessage += this.alphabet[j];
+        for (let it = 0; it < upSend.length; it++) {
+          if (this.abc.indexOf(upSend[it]) >= 0) {
+            let i = this.abc.indexOf(upperNewKey[it]);
+            let j = this.arr[i].indexOf(upSend[it]);
+            decryptMessage += this.abc[j];
           } else {
-            decryptMessage += upperMessage[it]
+            decryptMessage += upSend[it]
           }
         }
         return decryptMessage;
